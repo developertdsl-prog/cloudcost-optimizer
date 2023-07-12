@@ -1,0 +1,142 @@
+/**
+ * Seed dataset of multi-cloud resources, K8s workloads, and spot opportunities
+ */
+
+const sampleK8sWorkloads = [
+  {
+    clusterName: 'prod-us-east-k8s',
+    namespace: 'payments-service',
+    deploymentName: 'checkout-api',
+    currentCpuCores: 8.0,
+    p95CpuCores: 2.1,
+    currentMemoryGb: 16.0,
+    p95MemoryGb: 5.4,
+    replicas: 12,
+    monthlyCostUsd: 1420.00,
+  },
+  {
+    clusterName: 'prod-us-east-k8s',
+    namespace: 'search-core',
+    deploymentName: 'elasticsearch-index-worker',
+    currentCpuCores: 16.0,
+    p95CpuCores: 6.2,
+    currentMemoryGb: 32.0,
+    p95MemoryGb: 14.0,
+    replicas: 8,
+    monthlyCostUsd: 2840.00,
+  },
+  {
+    clusterName: 'analytics-eu-k8s',
+    namespace: 'stream-processing',
+    deploymentName: 'flink-telemetry-consumer',
+    currentCpuCores: 4.0,
+    p95CpuCores: 3.6,
+    currentMemoryGb: 8.0,
+    p95MemoryGb: 7.1,
+    replicas: 6,
+    monthlyCostUsd: 650.00,
+  },
+  {
+    clusterName: 'staging-k8s',
+    namespace: 'internal-tools',
+    deploymentName: 'mock-reporting-engine',
+    currentCpuCores: 4.0,
+    p95CpuCores: 0.3,
+    currentMemoryGb: 8.0,
+    p95MemoryGb: 1.1,
+    replicas: 4,
+    monthlyCostUsd: 480.00,
+  },
+];
+
+const sampleSpotOpportunities = [
+  {
+    provider: 'AWS',
+    region: 'us-east-1',
+    availabilityZone: 'us-east-1a',
+    instanceType: 'm5.2xlarge',
+    onDemandHourlyUsd: 0.384,
+    spotHourlyUsd: 0.115,
+    savingsPct: 70.0,
+    interruptionRiskPct: 6.5,
+    recommendedWorkload: 'batch-analytics-worker',
+  },
+  {
+    provider: 'AWS',
+    region: 'us-west-2',
+    availabilityZone: 'us-west-2b',
+    instanceType: 'c5.4xlarge',
+    onDemandHourlyUsd: 0.680,
+    spotHourlyUsd: 0.218,
+    savingsPct: 67.9,
+    interruptionRiskPct: 8.2,
+    recommendedWorkload: 'video-transcoding-pipeline',
+  },
+  {
+    provider: 'GCP',
+    region: 'europe-west1',
+    availabilityZone: 'europe-west1-b',
+    instanceType: 'n2-standard-8',
+    onDemandHourlyUsd: 0.388,
+    spotHourlyUsd: 0.136,
+    savingsPct: 64.9,
+    interruptionRiskPct: 9.1,
+    recommendedWorkload: 'model-evaluation-agent',
+  },
+  {
+    provider: 'AZURE',
+    region: 'eastus',
+    availabilityZone: 'eastus-1',
+    instanceType: 'Standard_D8s_v5',
+    onDemandHourlyUsd: 0.384,
+    spotHourlyUsd: 0.122,
+    savingsPct: 68.2,
+    interruptionRiskPct: 11.0,
+    recommendedWorkload: 'integration-test-runner',
+  },
+];
+
+const sampleCloudWaste = [
+  {
+    provider: 'AWS',
+    resourceId: 'vol-0a8f9c1b2d3e4f5a6',
+    resourceType: 'UNATTACHED_DISK',
+    region: 'us-east-1',
+    monthlyCostUsd: 120.00,
+    ageDays: 45,
+    remediationAction: 'DELETE_ORPHANED_EBS_VOLUME',
+  },
+  {
+    provider: 'AWS',
+    resourceId: 'eipalloc-0192837465ab',
+    resourceType: 'IDLE_STATIC_IP',
+    region: 'us-west-2',
+    monthlyCostUsd: 36.50,
+    ageDays: 82,
+    remediationAction: 'RELEASE_UNATTACHED_ELASTIC_IP',
+  },
+  {
+    provider: 'GCP',
+    resourceId: 'snap-orphaned-db-backup-202302',
+    resourceType: 'ORPHANED_SNAPSHOT',
+    region: 'us-central1',
+    monthlyCostUsd: 84.00,
+    ageDays: 140,
+    remediationAction: 'EXPIRE_STALE_SNAPSHOT',
+  },
+  {
+    provider: 'AZURE',
+    resourceId: 'lb-legacy-ingress-gateway',
+    resourceType: 'IDLE_LOAD_BALANCER',
+    region: 'eastus',
+    monthlyCostUsd: 146.00,
+    ageDays: 38,
+    remediationAction: 'DECOMMISSION_EMPTY_LOAD_BALANCER',
+  },
+];
+
+module.exports = {
+  sampleK8sWorkloads,
+  sampleSpotOpportunities,
+  sampleCloudWaste,
+};
