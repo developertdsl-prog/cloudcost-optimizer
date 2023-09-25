@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  optimizer:
+    build: .
+    container_name: cloudcost-optimizer-server
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/cloudcost_optimizer
+      - API_KEY=finops-master-access-token-2023
+      - HEADROOM_CPU_PCT=15
+      - HEADROOM_MEMORY_PCT=20
+    depends_on:
+      - mongo
+    restart: always
+
+  mongo:
+    image: mongo:6.0
+    container_name: cloudcost-optimizer-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+volumes:
+  mongo_data:
