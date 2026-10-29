@@ -10,47 +10,7 @@
 
 CloudCost-Optimizer is an enterprise-grade Multi-Cloud Financial Operations (FinOps) platform engineered to continuously discover, analyze, and eliminate unneeded cloud infrastructure spend across **AWS, Google Cloud (GCP), and Microsoft Azure**. It automates Kubernetes workload right-sizing based on P95 utilization curves, conducts real-time spot market arbitrage, flags zombie resources, and triggers statistical anomaly alerts before monthly invoice shocks occur.
 
----
 
-## 🏛️ Architecture Overview
-
-CloudCost-Optimizer aggregates telemetry and billing APIs from multi-cloud environments, processes usage metrics through statistical engines, and provides automated remediation recommendations.
-
-```mermaid
-graph TD
-    subgraph CloudProviders ["Multi-Cloud Ingestion"]
-        AWS["AWS CloudWatch / Cost Explorer"]
-        GCP["Google Cloud Monitoring / BigQuery Billing"]
-        Azure["Azure Cost Management / Monitor"]
-        K8s["Kubernetes Metrics Server / Prometheus"]
-    end
-
-    Gateway["CloudCost-Optimizer Ingestion & API Gateway (:5000)"]
-
-    subgraph FinOpsCore ["FinOps Optimization Engines"]
-        RightSizer["K8s Pod Right-Sizing Engine (P95 Headroom)"]
-        SpotArbitrage["Spot Arbitrage & Risk Scoring Engine"]
-        WasteDetector["Cloud Waste & Zombie Asset Detector"]
-        AnomalyEngine["Statistical Anomaly Detector (2.5σ Spike Model)"]
-        Forecaster["Budget Forecaster (Monte Carlo Linear Model)"]
-    end
-
-    subgraph Persistence ["Persistence & Analytics"]
-        Mongo[("MongoDB FinOps Store")]
-        UI["React 18 FinOps Executive Dashboard"]
-    end
-
-    CloudProviders --> Gateway
-    Gateway --> FinOpsCore
-    RightSizer --> Mongo
-    SpotArbitrage --> Mongo
-    WasteDetector --> Mongo
-    AnomalyEngine --> Mongo
-    Forecaster --> Mongo
-    Mongo --> UI
-```
-
----
 
 ## ⚖️ Spot Instance Arbitrage Decision Engine
 
